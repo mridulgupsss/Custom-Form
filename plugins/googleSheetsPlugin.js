@@ -66,27 +66,19 @@ async function insertDataIntoGoogleSheets(data) {
             range: `${sheetName}!A1:Z`,
         });
 
-        console.log("Response:", response);
+        // console.log("Response:", response);
+        // console.log("Response data is: ", response.data, "response value is: ", response.data.values, "response value length is: ", response.data.values.length);
 
-        console.log("Response data is: ", response.data, "response value is: ", response.data.values, "response value length is: ", response.data.values.length);
 
-       
         let insertRowIndex = 0;
         const numRows = response.data.values ? response.data.values.length : 0;
         const numCols = response.data.values && response.data.values[0] ? response.data.values[0].length : 0;
-
-        console.log("Num rows and columns:", numRows, numCols);
-
-      
+        // console.log("Num rows and columns:", numRows, numCols);
 
         insertRowIndex = numRows + 1;
+        // console.log("Insert row index:", insertRowIndex);
 
-        console.log("Insert row index:", insertRowIndex);
-
-       
         const rowData = Object.values(data);
-
-
         const range = `${sheetName}!A${insertRowIndex}`;
 
         const result = await sheets.spreadsheets.values.update({
@@ -109,17 +101,22 @@ async function insertDataIntoGoogleSheets(data) {
         console.log("errror is:", err);
     }
 }
-async function responseIntoGoogleSheets(response){
-   
-    for(let i=0; i<response.length; i++){
-        let data = {};
-         for(let j=0; j<response[i].answers.length; j++){
-            data[`data${j}`] = response[i].answers[j].answer_text;
-         }
-         console.log("data-->", data)
-         await insertDataIntoGoogleSheets(data)
+async function responseIntoGoogleSheets(response) {
+
+    try {
+        for (let i = 0; i < response.length; i++) {
+            let data = {};
+            for (let j = 0; j < response[i].answers.length; j++) {
+                data[`data${j}`] = response[i].answers[j].answer_text;
+            }
+            console.log("data-->", data)
+            await insertDataIntoGoogleSheets(data)
+        }
     }
-    
+    catch (err) {
+        console.log(err)
+    }
+
 }
 
 module.exports = { responseIntoGoogleSheets };

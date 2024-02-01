@@ -1,4 +1,3 @@
-// app.js
 const express = require('express');
 const mongoose = require('mongoose');
 const router = require('./routes');
@@ -16,7 +15,6 @@ db.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
-// Middleware
 app.use(express.json());
 
 // Routes
