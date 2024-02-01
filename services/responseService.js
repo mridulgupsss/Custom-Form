@@ -1,7 +1,7 @@
 const Response = require('../models/response-model');
 const Answer = require('../models/answer-model');
 const Question = require('../models/question-model');
-const googleSheet = require('../plugins/googleSheetsPlugin');
+// const googleSheet = require('../plugins/googleSheetsPlugin');
 
 async function createResponse(form_id, answers, user_id) {
   try {
@@ -33,9 +33,9 @@ async function createResponse(form_id, answers, user_id) {
 
 async function getAllResponses(formId) {
   try {
+    // console.log(formId, typeof formId);
     const responses = await Response.find({ form_id: formId });
     const responseArray = [];
-
     for (const response of responses) {
       const answers = await Answer.find({ response_id: response._id });
 
@@ -55,8 +55,8 @@ async function getAllResponses(formId) {
       });
     }
 
-    //Google Sheets Update
-    await googleSheet.responseIntoGoogleSheets(responseArray);
+    // Google Sheets Update
+    // await googleSheet.responseIntoGoogleSheets(formId, responseArray);
 
     return responseArray;
   } catch (error) {
