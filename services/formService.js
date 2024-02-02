@@ -15,7 +15,8 @@ async function createForm(title, questions) {
     const questionPromises = questions.map(async (question) => {
       const newQuestion = await Question.create({
         form_id,
-        text: question.text
+        text: question.text,
+        type: question.type
       });
       return newQuestion;
     });
