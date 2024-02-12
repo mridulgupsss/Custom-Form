@@ -1,7 +1,3 @@
-﻿Atlan Assignment Documentation
-
-(by Mridul Gupta)
-
 **Introduction** :
 
 I have created a backend project that boasts CRUD (Create, Read, Update, Delete) operations for forms. Whether you're collecting user responses, survey data, or any form-based information, the backend will handle it.
